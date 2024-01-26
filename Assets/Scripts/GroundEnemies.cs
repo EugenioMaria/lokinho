@@ -1,38 +1,25 @@
 using UnityEngine;
 
-public class InimigoMovimento : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
-    public float velocidade = 5f;
-    public bool viradoParaDireita = true;
+    public float speed = 5f;
+    public bool movingRight = true;
+    private Rigidbody2D rig;
 
-    void Update()
+    void Start()
     {
-        MoverInimigo();
+        rig = GetComponent<Rigidbody2D>();
     }
-
-    void MoverInimigo()
+    // Atualizado a cada frame.
+    void FixedUpdate()
     {
-        float movimentoHorizontal = viradoParaDireita ? 1 : -1;
-
-        // Movimento do inimigo
-        transform.Translate(Vector2.right * movimentoHorizontal * velocidade * Time.deltaTime);
-
-        // Verificar se o inimigo tocou em uma parede
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * movimentoHorizontal, 0.1f);
-
-        if (hit.collider != null && hit.collider.tag == "Parede")
+        if (movingRight)
         {
-            // Inverter a direção quando atingir uma parede
-            viradoParaDireita = !viradoParaDireita;
-            Flip();
+            rig.velocity = new Vector2(speed, rig.velocity.y);
         }
-    }
-
-    void Flip()
-    {
-        // Inverter a escala horizontal para mudar a direção do sprite
-        Vector3 escala = transform.localScale;
-        escala.x *= -1;
-        transform.localScale = escala;
+        else
+        {
+            rig.velocity = new Vector2(-speed, rig.velocity.y);
+        }
     }
 }
