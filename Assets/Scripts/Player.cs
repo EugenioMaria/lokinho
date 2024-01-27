@@ -9,13 +9,11 @@ public class Player : MonoBehaviour
     public Rigidbody2D rig;
     public bool isJumping;
     public bool doubleJump;
-    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         rig = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame 
@@ -35,7 +33,6 @@ public class Player : MonoBehaviour
         if(Input.GetButtonDown("Jump"))
         {   
             if(!isJumping) {
-                anim.SetBool("jump", true);
                 rig.AddForce(new Vector2(0f, JumpForce), ForceMode2D.Impulse);
                 doubleJump = true;
             }
@@ -55,7 +52,6 @@ public class Player : MonoBehaviour
         if(collisionInfo.gameObject.layer == 8)
         {
             isJumping = false;
-            anim.SetBool("jump", false);
         }
     }
 
