@@ -22,7 +22,7 @@ public class GroundCheckScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         // Verificar se colidiu com uma parede.
-        if (col.gameObject.CompareTag("Wall"))
+        if (col.gameObject.CompareTag("Ground"))
         {
             // Inverter a direção.
             enemie.movingRight = !enemie.movingRight;

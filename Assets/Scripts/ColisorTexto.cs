@@ -6,7 +6,7 @@ public class ColisorTexto : MonoBehaviour
 {
     [SerializeField] private ChatBubble chat;
     private IEnumerator coroutine;
-    // Start is called before the first frame update
+    public string areaText;
     void Start()
     {
 
@@ -26,6 +26,11 @@ public class ColisorTexto : MonoBehaviour
             {
                 coroutine = showChat(col);
                 StartCoroutine(coroutine);
+            }else{
+                StopCoroutine(coroutine);
+                coroutine = null;
+                coroutine = showChat(col);
+                StartCoroutine(coroutine);
             }
         }
     }
@@ -34,7 +39,7 @@ public class ColisorTexto : MonoBehaviour
     {
         chat = col.transform.Find("ChatBubble").GetComponent<ChatBubble>();
         chat.gameObject.SetActive(true);
-        chat.Setup("BORAAAA");
+        chat.Setup(areaText);
         yield return new WaitForSeconds(5);
         chat.gameObject.SetActive(false);
         coroutine = null;
