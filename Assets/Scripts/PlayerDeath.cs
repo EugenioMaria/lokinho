@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {
-        void OnTriggerEnter2D(Collision2D colidiu)
+
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (colidiu.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
            ReiniciarPartida();
-           Debug.Log ("Reinciando Cena");
         }
     }
-
+    
     private void ReiniciarPartida()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
